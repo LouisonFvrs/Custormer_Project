@@ -26,7 +26,7 @@ class ClientsModele extends SQL
         $stmt = SQL::getPdo()->prepare($query);
         $stmt->execute([":limit" => $limit * $page, ":offset" => $limit]);
 
-        return $stmt->fetchAll(\PDO::FETCH_CLASS, Client::class);
+        return $stmt->fetchAll(\PDO::FETCH_CLASS);
     }
 
     /**
@@ -49,7 +49,7 @@ class ClientsModele extends SQL
             ":offset" => $limit
         ]);
 
-        return $stmt->fetchAll(\PDO::FETCH_CLASS, Client::class);
+        return $stmt->fetchAll(\PDO::FETCH_CLASS);
     }
 
     /**
