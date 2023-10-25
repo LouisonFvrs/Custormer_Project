@@ -14,6 +14,13 @@ class ProduitsModele extends SQL
         parent::__construct('produit', 'id');
     }
 
+    public function getProduits(int $limit = PHP_INT_MAX, int $page = 0): array {
+        $query = "SELECT produit.* FROM produit INNER JOIN client LIMIT :limit,:offset;";
+        $stmt = SQL::getPdo()->prepare($query);
+        $stmt->execute([":limit" => $limit * $page, ":offset" => $limit]);
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, Produit::class);
+    }
+
     /**
      * Liste les produits d'un client donné
      * @param string $clientId
@@ -70,6 +77,6 @@ class ProduitsModele extends SQL
     public function affecterProduit(int $idProduit, int $idClient){
         $query = "INSERT INTO commander(idProduit, idClient) VALUE (?, ?)";
         $stmt = SQL::getPdo()->prepare($query);
-        $stmt->execute([$idClient, $idProduit]);
+        $stmt->execute([$idProduit, $idClient]);
     }
 }
