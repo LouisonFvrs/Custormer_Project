@@ -141,7 +141,7 @@
                             <td><?= $adress->getCodePostal(); ?></td>
                             <td><?= $adress->getVille(); ?></td>
                             <td>
-                                <a href="supprimerAdresse/<?= $adress->getId()?>">
+                                <a href="/supprimerAdresse/<?= $client->getId()?>/<?= $adress->getId()?>">
                                     <button type="button" id="<?= $adress->getId()?>" class="btn btn-danger">Supprimer</button>
                                 </a>
                             </td>

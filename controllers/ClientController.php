@@ -114,7 +114,11 @@ class ClientController extends WebController
         $value = $this->contactModele->creerContact($contact, $id);
         $this->redirect('/client/' . $idClient);
 
+    }
 
+    public function supprimerAdresse($idClient, $idAdresse) {
+        $this->adresseModel->supprimer($idClient, $idAdresse);
+        $this->redirect('/client/' . $idClient);
     }
 
     function  connexion() {

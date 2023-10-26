@@ -35,5 +35,5 @@ class ProduitController extends WebController
         $this->produitsModel->supprimer($id);
         $this->redirect('/liste-produit');
 
-}
+    }
 }

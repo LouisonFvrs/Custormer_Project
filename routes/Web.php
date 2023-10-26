@@ -28,6 +28,7 @@ class Web
         Route::Add("/supprimerProduit/{id}", [$produit, 'supprimer']);
 
         Route::Add("/client/{id}", [$fiche, 'fiche']);
+        Route::Add("/supprimerAdresse/{idClient}/{idAdresse}", [$client, 'supprimerAdresse']);
 
         Route::Add("/commander/{id}", [$client, 'listeProduit']);
         Route::Add("/commander/{id}/{page}", [$client, 'listeProduit']);
@@ -44,7 +45,6 @@ class Web
 
         Route::Add("/ajoutContact/{id}", [$client, 'ajouterContact']);
         Route::Add("/ajoutDuContact/{id}", [$client, 'ajouterUnContact']);
-
 
     }
 }

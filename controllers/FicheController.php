@@ -16,7 +16,6 @@ class FicheController extends WebController
     // Afficher la liste d'un client
     public function fiche($id=1): string
     {
-
         // Récupération des données d'un client par son id
         $client = $this->clientsModele->getByClientId($id);
 

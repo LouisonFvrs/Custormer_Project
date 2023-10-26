@@ -45,4 +45,13 @@ class AdresseModel extends SQL
         $stmt->execute([$uneAdresse->getNom(), $uneAdresse->getRue(), $uneAdresse->getCodePostal(), $uneAdresse->getVille(), $uneAdresse->getClientId()]);
         return $this->getPdo()->lastInsertId();
     }
+
+    // Supprimer une adresse d'un client
+    public function supprimer($idClient, $idAdresse) {
+        $query = "DELETE from adresse WHERE adresse.id = ? and adresse.clientId = ?";
+        $stmt = SQL::getPdo()->prepare($query);
+        $stmt->execute([$idAdresse, $idClient]);
+    }
+
+
 }
