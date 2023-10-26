@@ -77,7 +77,11 @@
                             <td><?= $leProduit->getNom(); ?></td>
                             <td><?= $leProduit->getDescription(); ?></td>
                             <td><?= $leProduit->getPrix(); ?></td>
-                            <td></td>
+                            <td>
+                                <a href="supprimerProduit/<?= $leProduit->getId()?>">
+                                    <button type="button" id="<?= $leProduit->getId()?>" class="btn btn-danger">Supprimer</button>
+                                </a>
+                            </td>
                         </tr>
                     <?php } ?>
                     </tbody>
@@ -136,7 +140,11 @@
                             <td><?= $adress->getRue(); ?></td>
                             <td><?= $adress->getCodePostal(); ?></td>
                             <td><?= $adress->getVille(); ?></td>
-                            <td></td>
+                            <td>
+                                <a href="supprimerAdresse/<?= $adress->getId()?>">
+                                    <button type="button" id="<?= $adress->getId()?>" class="btn btn-danger">Supprimer</button>
+                                </a>
+                            </td>
                         </tr>
                     <?php } ?>
                     </tbody>
@@ -194,7 +202,12 @@
                             <th scope="row"><?= $contact->getNom(); ?></th>
                             <td><?= $contact->getNumContact(); ?></td>
                             <td><?= $contact->getEmail(); ?></td>
-                            <td></td>
+                            <td>
+                                <a href="supprimerContact/<?= $contact->getId()?>">
+                                    <button type="button" id="<?= $contact->getId()?>" class="btn btn-danger">Supprimer</button>
+
+                                </a>
+                            </td>
                         </tr>
                     <?php } ?>
                     </tbody>

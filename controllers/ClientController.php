@@ -65,6 +65,7 @@ class ClientController extends WebController
 
         $adresse = new Adresse();
 
+
         $adresse->setNom(htmlspecialchars($nom));
         $adresse->setRue(htmlspecialchars($rue));
         $adresse->setCodePostal(htmlspecialchars($codePostal));
@@ -75,15 +76,23 @@ class ClientController extends WebController
         $this->redirect('/client/' . $idClient);
     }
 
-    function ajouterClient($nom, $prenom, $telephone, $email): string {
+    function ajouterClient(): string {
 
         $client = new Client();
+
+        $nom = $_POST['nom'];
+        $prenom = $_POST['prenom'];
+        $telephone = $_POST['telephone'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        var_dump($nom, $email, $prenom);
+        die();
 
         $client->setNom(htmlspecialchars($nom));
         $client->setPrenom(htmlspecialchars($prenom));
         $client->setEmail(htmlspecialchars($email));
         $client->setTelephone(htmlspecialchars($telephone));
-
 
         $value = $this->clientsModele->creerClient($client);
 

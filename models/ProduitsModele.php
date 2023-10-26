@@ -14,12 +14,51 @@ class ProduitsModele extends SQL
         parent::__construct('produit', 'id');
     }
 
-    public function getProduits(int $limit = PHP_INT_MAX, int $page = 0): array {
-        $query = "SELECT produit.* FROM produit INNER JOIN client LIMIT :limit,:offset;";
+    // Retourne seulement les produtuits qu'un client n'a pas commander
+    public function getProduits(int $idClient, int $limit = PHP_INT_MAX, int $page = 0): array {
+        $query = "SELECT produit.* FROM produit WHERE produit.id NOT IN ( SELECT commander.idProduit FROM commander WHERE commander.idClient = :id) LIMIT :limit,:offset;";
         $stmt = SQL::getPdo()->prepare($query);
-        $stmt->execute([":limit" => $limit * $page, ":offset" => $limit]);
+        $stmt->execute([":id" => "$idClient"
+            ,":limit" => $limit * $page,
+            ":offset" => $limit
+        ]);
         return $stmt->fetchAll(\PDO::FETCH_CLASS, Produit::class);
     }
+
+    // Retourne tous les produits
+    public function getAllProduits( int $limit = PHP_INT_MAX, int $page = 0): array {
+        $query = "SELECT produit.* FROM produit LIMIT :limit,:offset;";
+        $stmt = SQL::getPdo()->prepare($query);
+        $stmt->execute([
+            ":limit" => $limit * $page,
+            ":offset" => $limit
+        ]);
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, Produit::class);
+    }
+
+    // Rechercher un produit
+    public function recherche(string $keyword = "", int $limit = PHP_INT_MAX, int $page = 0): array
+    {
+        $query = "SELECT * FROM produit WHERE nom LIKE :nom OR description like :description OR prix like :prix LIMIT :limit,:offset;";
+
+        $stmt = SQL::getPdo()->prepare($query);
+        $stmt->execute([
+            ":nom" => "%$keyword%",
+            ":description" => "%$keyword%",
+            ":prix" => "%$keyword%",
+            ":limit" => $limit * $page,
+            ":offset" => $limit
+        ]);
+
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, Produit::class);
+    }
+
+    public function supprimer($id) {
+        $query = "DELETE from produit WHERE produit.id = ?";
+        $stmt = SQL::getPdo()->prepare($query);
+        $stmt->execute([$id]);
+    }
+
 
     /**
      * Liste les produits d'un client donné

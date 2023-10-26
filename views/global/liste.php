@@ -36,10 +36,10 @@
                         <th scope="col">Téléphone</th>
                         <th scope="col">Email</th>
                         <th>
-                            <a href="/ajouterClient">
+                            <a id="ajoutClient">
                                 <button class="btn btn-success">
                                     <svg class="svgPlus" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
-                                    <span>Créer un client</span>
+                                    <span>Client</span>
                                 </button>
                             </a>
                         </th>
@@ -63,4 +63,80 @@
                 </table>
             </div>
     </div>
-</div>
+
+<script>
+
+    function isPhoneNumberValid(phoneNumber) {
+        const phoneRegex = /^[0-9]{10}$/;
+        return phoneRegex.test(phoneNumber);
+    }
+
+    function isEmailValid(email) {
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        return emailRegex.test(email);
+    }
+
+    function isPasswordValid(password) {
+        const passwordRegex = /^(?=.*\d)(?=.*[A-Z])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+        return passwordRegex.test(password);
+    }
+
+    document.getElementById('ajoutClient').addEventListener('click', function () {
+        Swal.fire({
+            title: 'Ajouter un client',
+            html:
+                '<form id="clientForm">' +
+                '<input id="nom" class="swal2-input" placeholder="Nom">' +
+                '<input id="prenom" class="swal2-input" placeholder="Prénom">' +
+                '<input id="telephone" class="swal2-input" placeholder="Numéro de téléphone">' +
+                '<input id="email" class="swal2-input" placeholder="Email">' +
+                '<input id="password" class="swal2-input" type="password" placeholder="Mot de passe">' +
+                '</form>',
+            showCancelButton: true,
+            confirmButtonText: 'Ajouter',
+            cancelButtonText: 'Annuler',
+            preConfirm: () => {
+                const nom = document.getElementById('nom').value;
+                const prenom = document.getElementById('prenom').value;
+                const telephone = document.getElementById('telephone').value;
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+
+                // Envoi des données au serveur via une requête POST
+                fetch('/ajoutDuClient', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        nom: nom,
+                        prenom: prenom,
+                        telephone: telephone,
+                        email: email,
+                        password: password
+                    })
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json();
+                        }
+                        throw new Error('Échec de la requête');
+                    })
+                    .then(data => {
+                        // Gérez la réponse du serveur ici si nécessaire
+                        Swal.fire('Succès', 'Le client a été ajouté avec succès.', 'success');
+                    })
+                    .catch(error => {
+                        // Gérez les erreurs de la requête ici
+                        Swal.fire('Erreur', 'Une erreur est survenue lors de l\'ajout du client.', 'error');
+                    });
+
+
+
+            }
+        })
+    });
+</script>
+
+
+

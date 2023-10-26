@@ -1,4 +1,5 @@
-<footer class="bg-dark text-center text-white">
+</body>
+<footer class="bg-dark text-center text-white ">
     <div class="container p-4 pb-0">
         <section class="mb-4 d-flex justify-content-center align-items-center">
 
@@ -19,14 +20,13 @@
         </section>
     </div>
 
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-        © 2023 project:
+    <div class="text-center p-3 bottom-footer">
+        © 2023
         <a class="text-white" href="https://github.com/LouisonFvrs/Custormer_Project">Customer project</a>
     </div>
 
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <div class="text-center p-3 bottom-footer">
         <a class="text-white" href="https://cours.brosseau.ovh/tp/php/mvc/tp2.html">Ressources</a>
     </div>
 </footer>
-</body>
 </html>
