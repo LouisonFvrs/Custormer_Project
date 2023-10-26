@@ -7,6 +7,11 @@
 }
 .svg2 {
     fill: #ffffff;
+    margin-right: 5px;
+}
+
+a {
+    text-decoration: none;
 }
 
 th:last-child {
@@ -85,5 +90,19 @@ button {
 
 .profil {
     background: rgb(255,255,255);
-    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(58,171,2,1) 0%, rgba(39,190,93,1) 100%);
+    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgb(227, 226, 226) 0%, rgb(211, 210, 210) 100%);
+}
+
+.btn {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+a {
+    display: inline-block;
+}
+
+.svg-footer {
+    fill: white;
 }
