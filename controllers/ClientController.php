@@ -52,7 +52,6 @@ class ClientController extends WebController
     function commander($idClient, $idProduit): string {
 
         $this->produitsModele->affecterProduit($idProduit, $idClient);
-
         $this->redirect('/client/' . $idClient);
     }
 
@@ -116,8 +115,15 @@ class ClientController extends WebController
 
     }
 
+    // Supprimer l'adresse d'un client
     public function supprimerAdresse($idClient, $idAdresse) {
         $this->adresseModel->supprimer($idClient, $idAdresse);
+        $this->redirect('/client/' . $idClient);
+    }
+
+    // Supprimer le contact d'un client
+    public function supprimerContact($idClient, $idContact) {
+        $this->contactModele->supprimer($idClient, $idContact);
         $this->redirect('/client/' . $idClient);
     }
 

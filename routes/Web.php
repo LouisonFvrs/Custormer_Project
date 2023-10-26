@@ -45,6 +45,7 @@ class Web
 
         Route::Add("/ajoutContact/{id}", [$client, 'ajouterContact']);
         Route::Add("/ajoutDuContact/{id}", [$client, 'ajouterUnContact']);
+        Route::Add("/supprimerContact/{idClient}/{idContact}", [$client, 'supprimerContact']);
 
     }
 }

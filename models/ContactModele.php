@@ -33,6 +33,14 @@ class ContactModele extends SQL
         $stmt->execute([$idContact, $idClient]);
     }
 
+    // Supprimer un contact d'un client
+    public function supprimer($idClient, $idContact) {
+        var_dump($idClient, $idContact);
+        $query = "DELETE from contacter WHERE contacter.idClient = ? and contacter.idContact = ?";
+        $stmt = SQL::getPdo()->prepare($query);
+        $stmt->execute([$idClient, $idContact]);
+    }
+
     public function lesContactsClient(string $clientId): array
     {
         $query = "SELECT contact.* FROM contact INNER JOIN contacter ON contacter.idContact = contact.idContact INNER JOIN client ON client.id = contacter.idClient WHERE idClient = ?";

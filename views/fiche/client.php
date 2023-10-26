@@ -203,7 +203,7 @@
                             <td><?= $contact->getNumContact(); ?></td>
                             <td><?= $contact->getEmail(); ?></td>
                             <td>
-                                <a href="supprimerContact/<?= $contact->getId()?>">
+                                <a href="/supprimerContact/<?= $client->getId() ?>/<?= $contact->getId() ?>">
                                     <button type="button" id="<?= $contact->getId()?>" class="btn btn-danger">Supprimer</button>
 
                                 </a>
